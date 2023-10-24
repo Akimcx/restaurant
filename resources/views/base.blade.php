@@ -8,30 +8,37 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>@yield('title')</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    @vite('resources/css/app.css')
     {{-- <link href="css/styles.css" rel="stylesheet"> --}}
     {{-- <link href="css/header.css" rel="stylesheet"> --}}
-    <script src="js/index.js" defer></script>
+    {{-- <script src="js/index.js" defer></script> --}}
 </head>
 
 <body class="home">
-    <nav id="header" class="navbar bg-dark">
-        <div class="container">
-            <a class="text-white navbar-brand" href="index.php">Foodie<span>..</span></a>
-            <ul class="text-white navbar-nav">
-                <li class="nav-item active">
+    <nav id="header" class="bg-header p-4 sticky top-0 z-50">
+        <div class="container flex items-center justify-between">
+            <a class="text-white text-2xl" href="index.php">
+                Foodie<span class="text-link font-bold text-4xl">..</span>
+            </a>
+            <ul class="text-link flex gap-4">
+                <li class="">
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="restaurants.php">Restaurants</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="restaurants.php">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="restaurants.php">Sign Up</a>
+                </li>
             </ul>
         </div>
     </nav>
-    <div class="container">
+    <main class="main">
         @yield('content')
-    </div>
+    </main>
 </body>
 
 </html>
