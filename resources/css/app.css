@@ -12,6 +12,16 @@
     @apply object-cover h-full w-full;
 }
 
+@layer components {
+    .card {
+        background-color: theme("colors.white");
+        border-radius: theme("borderRadius.lg");
+        box-shadow: theme("boxShadow.2xl");
+        padding: theme("spacing.4");
+    }
+    /* ... */
+}
+
 /* .text-link-500 {
     position: relative;
 }

@@ -42,6 +42,7 @@ class AdminController extends Controller
     public function signin(StoreAdminRequest $request): RedirectResponse
     {
         $val = $request->validated();
+        // dd(Hash::make($val['password']));
         $user = User::create([
             'email' => $val['email'],
             'password' => Hash::make($val['password']),

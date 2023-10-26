@@ -9,7 +9,7 @@
             <div class="bg-link-500 rounded-full w-[150px] h-[150px] mx-auto">
                 <img src="/assets/manager.png" />
             </div>
-            <form class="w-10/12 mx-auto grid gap-4 mt-10" action="" method="post">
+            <form class="w-10/12 mx-auto grid gap-4 my-10" action="" method="post">
                 @csrf
                 <x-forms.input label='Email' holder='Email' id='Email' name='email' />
                 <x-forms.input label='Password' holder='Password' id='password' name='password' type='password' />
@@ -20,7 +20,7 @@
                 </button>
                 <p class="text-gray-600">
                     Not registered?
-                    <a href={{ route('auth.login') }} id="signin" class="text-link-500 font-semibold">Create an
+                    <a href={{ route('auth.signin') }} id="signin" class="text-link-500 font-semibold">Create an
                         account</a>
                 </p>
             </form>

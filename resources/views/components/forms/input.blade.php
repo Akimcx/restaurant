@@ -1,5 +1,5 @@
 @php
-    $value = old($name);
+    $value ??= old($name);
 @endphp
 <div class="relative">
     <input type="{{ $type }}" id="{{ $id }}"

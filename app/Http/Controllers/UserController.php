@@ -2,33 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Dish;
-use App\Models\Restaurant;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\View\View;
 
-class DishController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view("dashboard.dish.index", [
-            "dishes" => Dish::all()
-        ]);
+        return view("dashboard.user.index");
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create()
     {
-        return view("dashboard.dish.create", [
-            "dish" => new Dish(),
-            "restaurants" => Restaurant::all()
-        ]);
+        //
     }
 
     /**
@@ -42,7 +34,7 @@ class DishController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Dish $dish)
+    public function show(User $user)
     {
         //
     }
@@ -50,7 +42,7 @@ class DishController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Dish $dish)
+    public function edit(User $user)
     {
         //
     }
@@ -58,7 +50,7 @@ class DishController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Dish $dish)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -66,7 +58,7 @@ class DishController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Dish $dish)
+    public function destroy(User $user)
     {
         //
     }

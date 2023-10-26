@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id("restaurant_id");
-            $table->string("restaurant_title")->nullable(false);
-            $table->string("restaurant_email")->nullable(false);
-            $table->string("restaurant_url")->nullable(false);
+            $table->string("restaurant_name")->nullable(false);
+            $table->string("restaurant_email")->nullable(false)->unique();
+            $table->string("restaurant_url")->nullable(false)->unique();
             $table->string("restaurant_open_hours")->nullable(false);
             $table->string("restaurant_close_hours")->nullable(false);
             $table->string("restaurant_open_days")->nullable(false);

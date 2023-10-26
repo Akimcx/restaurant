@@ -4,7 +4,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DishController;
-use App\Models\Dishes;
+use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\UserController;
+use App\Models\Dish;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,12 +23,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix("dashboard")->name("dashboard.")->controller(DashboardController::class)->middleware("auth")->group(function () {
     Route::get("/", "index")->name("index");
+    Route::resource("dish", DishController::class);
+    Route::resource("user", UserController::class);
+    Route::resource("restaurant", RestaurantController::class);
 });
-Route::prefix("dish")->name("dish.")->controller(DishController::class)->group(function () {
-    Route::get("/", "index")->name("index");
-    Route::get("/create", "create")->name("create");
-    Route::get("/edit", "edit")->name("edit");
-});
+// Route::prefix("dish")->name("dish.")->controller(DishController::class)->group(function () {
+//     Route::get("/", "index")->name("index");
+//     Route::get("/create", "create")->name("create");
+//     Route::get("/edit", "edit")->name("edit");
+// });
 
 Route::prefix("admin")->name("admin.")->controller(AdminController::class)->group(function () {
     Route::get("/", function () {
@@ -47,11 +53,11 @@ Route::prefix("auth")->name("auth.")->controller(AuthController::class)->group(f
 });
 
 Route::get('/', function () {
-    $dishes = Dishes::all();
+    $dishes = Dish::all();
     return view('index', ['dishes' => $dishes]);
 })->name('home.index');
 
 Route::get('/restaurant', function () {
-    $dishes = Dishes::all();
+    $dishes = Dish::all();
     return view('index', ['dishes' => $dishes]);
 })->name('home.restaurant');

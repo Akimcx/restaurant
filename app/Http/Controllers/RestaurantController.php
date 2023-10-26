@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Dish;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
-class DishController extends Controller
+class RestaurantController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        return view("dashboard.dish.index", [
-            "dishes" => Dish::all()
-        ]);
+        return view("dashboard.restaurant.index");
     }
 
     /**
@@ -25,10 +21,7 @@ class DishController extends Controller
      */
     public function create(): View
     {
-        return view("dashboard.dish.create", [
-            "dish" => new Dish(),
-            "restaurants" => Restaurant::all()
-        ]);
+        return view("dashboard.restaurant.create");
     }
 
     /**
@@ -42,7 +35,7 @@ class DishController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Dish $dish)
+    public function show(Restaurant $restaurants)
     {
         //
     }
@@ -50,7 +43,7 @@ class DishController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Dish $dish)
+    public function edit(Restaurant $restaurants)
     {
         //
     }
@@ -58,7 +51,7 @@ class DishController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Dish $dish)
+    public function update(Request $request, Restaurant $restaurants)
     {
         //
     }
@@ -66,7 +59,7 @@ class DishController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Dish $dish)
+    public function destroy(Restaurant $restaurants)
     {
         //
     }
