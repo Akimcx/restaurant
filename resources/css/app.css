@@ -8,7 +8,6 @@
 
 .leftImg img,
 .rightImg img {
-    /* color: #008a5c; */
     @apply object-cover h-full w-full;
 }
 

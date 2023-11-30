@@ -3,9 +3,14 @@
 @section('content')
     <div class="container">
         <div class="card mt-4 mb-16">
+            @if($categories->isEmpty())
+            <p class="text-center font-bold">Aucune catégories</p>
+            <a href="{{route('dashboard.category.create')}}">Ajouter un catégorie</a>
+            @else
             <h4 class="text-center mb-1 p-1 rounded-md bg-link-500 text-white">Add Restaurant</h4>
             <hr>
-            <form action='' method='post' class="mt-2 grid grid-cols-2 gap-2">
+            <form action='{{route('dashboard.restaurant.store')}}' method='post' class="mt-2 grid grid-cols-2 gap-2">
+                @csrf
                 <x-forms.input label="Name" id="name" name="name" holder="Name" />
                 <x-forms.input label="Email" id="email" name="email" holder="Email" />
                 <x-forms.input label="Phone" id="phone" name="phone" holder="Phone" />
@@ -13,7 +18,7 @@
 
                 <div class="form-group">
                     <label class="control-label">Open Hours</label>
-                    <select name="o_hr" class="form-control custom-select" data-placeholder="Choose a Category">
+                    <select name="open_hours" class=" custom-select" data-placeholder="Choose a Category">
                         <option>--Select your Hours--</option>
                         <option value="6am">6am</option>
                         <option value="7am">7am</option>
@@ -25,7 +30,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Close Hours</label>
-                    <select name="c_hr" class="form-control custom-select" data-placeholder="Choose a Category">
+                    <select name="close_hours" class=" custom-select" data-placeholder="Choose a Category">
                         <option>--Select your Hours--</option>
                         <option value="3pm">3pm</option>
                         <option value="4pm">4pm</option>
@@ -37,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Open Days</label>
-                    <select name="o_days" class="form-control custom-select" data-placeholder="Choose a Category"
+                    <select name="open_days" class=" custom-select" data-placeholder="Choose a Category"
                         tabindex="1">
                         <option>--Select your Days--</option>
                         <option value="mon-tue">mon-tue</option>
@@ -50,23 +55,28 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Image</label>
-                    <input type="file" name="file" id="lastName" class="form-control form-control-danger"
+                    <input type="file" accept="image/*" name="file" id="lastName"
                         placeholder="12n">
                 </div>
                 <div class="form-group">
                     <label class="control-label">Select Category</label>
-                    <select name="c_name" class="form-control custom-select" data-placeholder="Choose a Category"
+                    <select name="category_id" data-placeholder="Choose a Category"
                         tabindex="1">
                         <option>--Select Category--</option>
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="">
                     <label class="">Store Address</label>
-                    <textarea name="address" type="text" style="height:100px;" class="form-control"></textarea>
+                    <textarea name="address" class="border"></textarea>
                 </div>
-                <button type="submit" class="">Create</button>
-                <a href="{{ route('dashboard.restaurant.index') }}" class="btn btn-inverse">Cancel</a>
+                <button type="submit" class="bg-link-500 text-white rounded p-1">Create</button>
+                <a class="p-1 border rounded text-center border-black" href="{{ route('dashboard.restaurant.index') }}" class="btn btn-inverse">Cancel</a>
             </form>
+            @endif
+
         </div>
     </div>
 @endsection

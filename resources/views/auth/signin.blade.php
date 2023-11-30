@@ -9,7 +9,7 @@
             <div class="bg-link-500 rounded-full w-[150px] h-[150px] mx-auto">
                 <img src="/assets/manager.png" />
             </div>
-            <form class="grid w-10/12 mx-auto grid-cols-2 gap-4" action="" method="post">
+            <form class="grid w-10/12 mx-auto grid-cols-2 gap-4" action="{{route('admin.signin')}}" method="post">
                 @csrf
                 <x-forms.input id="username" name="name" label="Username" holder="Username" />
                 <x-forms.input label='Email' holder="Email address" id='email' name='email' type='email' />

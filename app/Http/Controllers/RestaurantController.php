@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRestaurantRequest;
+use App\Models\Category;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -13,7 +15,10 @@ class RestaurantController extends Controller
      */
     public function index(): View
     {
-        return view("dashboard.restaurant.index");
+        return view("dashboard.restaurant.index",[
+            'restaurants' => Restaurant::all(),
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -21,15 +26,21 @@ class RestaurantController extends Controller
      */
     public function create(): View
     {
-        return view("dashboard.restaurant.create");
+        return view("dashboard.restaurant.create",[
+            "categories"=>Category::all()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRestaurantRequest $request)
     {
-        //
+        // dd($request->validated());
+        $res = Restaurant::create($request->validated());
+        // dd($res);
+        return to_route('dashboard.restaurant.index')
+        ->with('success','Le restaurant' . $res->name . ' a ete creer');
     }
 
     /**

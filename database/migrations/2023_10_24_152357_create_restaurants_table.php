@@ -12,15 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('restaurants', function (Blueprint $table) {
-            $table->id("restaurant_id");
-            $table->string("restaurant_name")->nullable(false);
-            $table->string("restaurant_email")->nullable(false)->unique();
-            $table->string("restaurant_url")->nullable(false)->unique();
-            $table->string("restaurant_open_hours")->nullable(false);
-            $table->string("restaurant_close_hours")->nullable(false);
-            $table->string("restaurant_open_days")->nullable(false);
-            $table->text("restaurant_address")->nullable(false);
-            $table->text("restaurant_image")->nullable(false);
+            $table->id("id");
+            $table->string("name");
+            $table->string("email")->unique();
+            $table->string("url")->unique();
+            $table->string("open_hours");
+            $table->string("close_hours");
+            $table->string("open_days");
+            $table->text("address");
+            $table->text("image");
+            $table->text('phone')->unique();
+            $table->softDeletes()->nullable();
             $table->timestamps();
         });
     }

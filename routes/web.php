@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\UserController;
 use App\Models\Dish;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,12 +26,17 @@ Route::prefix("dashboard")->name("dashboard.")->controller(DashboardController::
     Route::resource("dish", DishController::class);
     Route::resource("user", UserController::class);
     Route::resource("restaurant", RestaurantController::class);
+    Route::resource("category", CategoryController::class);
 });
 // Route::prefix("dish")->name("dish.")->controller(DishController::class)->group(function () {
 //     Route::get("/", "index")->name("index");
 //     Route::get("/create", "create")->name("create");
 //     Route::get("/edit", "edit")->name("edit");
 // });
+
+Route::get('pricing',function () {
+   return view('pricing.index'); 
+})->name('pricing.index');
 
 Route::prefix("admin")->name("admin.")->controller(AdminController::class)->group(function () {
     Route::get("/", function () {
