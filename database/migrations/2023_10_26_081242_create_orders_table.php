@@ -22,14 +22,6 @@ return new class extends Migration
             $table->string("status");
             $table->timestamps();
         });
-        Schema::table("users", function (Blueprint $table) {
-            $table->foreignIdFor(Order::class)->nullable()->constrained()->cascadeOnDelete();
-        });
-        Schema::create("dish_order", function (Blueprint $table) {
-            $table->foreignIdFor(Dish::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Order::class)->constrained()->cascadeOnDelete();
-            $table->primary(["dish_id", "order_id"]);
-        });
     }
 
     /**
@@ -37,10 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dish_order');
         Schema::dropIfExists('orders');
-        Schema::table("users", function (Blueprint $table) {
-            $table->dropForeignIdFor(User::class);
-        });
     }
 };

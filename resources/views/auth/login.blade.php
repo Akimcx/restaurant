@@ -1,29 +1,29 @@
 @extends('base')
-@section('title', 'Admin Login')
+@section('title', 'Se connecter')
 @section('content')
     <div class="container mt-10">
         <header class="text-center">
-            <h1 class="text-5xl font-bold mb-1">Log In</h1>
+            <h1 class="mb-1 text-5xl font-bold">Se connecter</h1>
         </header>
-        <section class="flex flex-col gap-4 mt-4">
-            <div class="bg-link-500 rounded-full w-[150px] h-[150px] mx-auto">
+        <section class="mt-4 flex flex-col gap-4">
+            <div class="mx-auto h-[150px] w-[150px] rounded-full bg-link-500">
                 <img src="/assets/manager.png" />
             </div>
-            <form class="w-10/12 mx-auto grid gap-4 my-10" action="" method="post">
+            <x-form class="grid gap-4 bg-slate-50" action="" method="post">
                 @csrf
-                <x-forms.input label='Email' holder='Email' id='Email' name='email' />
-                <x-forms.input label='Password' holder='Password' id='password' name='password' type='password' />
+                <x-form.input label='Email' holder='Email' id='Email' name='email' />
+                <x-form.input label='Password' holder='Password' id='password' name='password' type='password' />
                 <button
-                    class="focus-visible:outline-1 focus-visible:outline-link-500 focus-visible:outline-offset-1 font-semibold bg-link-500 p-4 text-white rounded-lg hover:bg-link-900"
+                    class="rounded-lg bg-link-500 p-4 font-semibold text-white hover:bg-link-900 focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-link-500"
                     type="submit">
-                    Log In
+                    Se connecter
                 </button>
                 <p class="text-gray-600">
-                    Not registered?
-                    <a href={{ route('auth.signin') }} id="signin" class="text-link-500 font-semibold">Create an
-                        account</a>
+                    Pas encore inscrit?
+                    <a href={{ route('auth.signin') }} id="signin" class="font-semibold text-link-500">Créer un
+                        compte</a>
                 </p>
-            </form>
+            </x-form>
         </section>
     </div>
 @endsection

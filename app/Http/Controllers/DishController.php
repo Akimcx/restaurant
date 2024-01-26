@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreDishRequest;
 use App\Models\Dish;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
@@ -34,9 +36,15 @@ class DishController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreDishRequest $request)
     {
-        //
+        $data = $request->validated();
+        /** @var UploadedFile $image */
+        $image = $data['img'];
+        $data['img'] = $image->store('dishes', 'public');
+        $dish = Dish::create($data);
+        return to_route('dashboard.dish.index')
+            ->with('success', 'Le plat' . $dish->name . ' a ete créer');
     }
 
     /**

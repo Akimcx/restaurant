@@ -1,29 +1,29 @@
 @extends('base')
-@section('title', 'Sign Up')
+@section('title', 'Inscription')
 @section('content')
     <div class="container mt-10">
         <header class="text-center">
-            <h1 class="text-5xl font-bold mb-1">Sign Up</h1>
+            <h1 class="mb-1 text-5xl font-bold">Inscription</h1>
         </header>
-        <section class="flex flex-col gap-4 mt-4">
-            <div class="bg-link-500 rounded-full w-[150px] h-[150px] mx-auto">
+        <section class="mt-4 flex flex-col gap-4">
+            <div class="mx-auto h-[150px] w-[150px] rounded-full bg-link-500">
                 <img src="/assets/manager.png" />
             </div>
-            <form class="grid w-10/12 mx-auto grid-cols-2 gap-4" action="{{route('admin.signin')}}" method="post">
+            <x-form class="grid gap-4 bg-slate-50" action="{{ route('auth.signin') }}" method="post">
                 @csrf
-                <x-forms.input id="username" name="name" label="Username" holder="Username" />
-                <x-forms.input label='Email' holder="Email address" id='email' name='email' type='email' />
-                <x-forms.input label='Password' holder='Password' id='password' name='password' type='password' />
-                <x-forms.input label='Confirm password' holder='Confirm password' id='confirm-password'
+                <x-form.input id="username" name="name" label="Username" holder="Username" />
+                <x-form.input label='Email' holder="Email address" id='email' name='email' type='email' />
+                <x-form.input label='Password' holder='Mot de passe' id='password' name='password' type='password' />
+                <x-form.input label='Confirm password' holder='Confirmation mot de passe' id='confirm-password'
                     name='password_confirmation' type='password' />
-                <button class="font-semibold col-span-2 bg-link-500 p-4 text-white rounded-lg hover:bg-link-900"
+                <button class="col-span-2 rounded-lg bg-link-500 p-4 font-semibold text-white hover:bg-link-900"
                     type="submit">
-                    Sign Up
+                    Inscription
                 </button>
-                <p class="text-gray-600">Already registered?
-                    <a href={{ route('admin.login') }} id="login" class="text-link-500 font-semibold">Log In</a>
+                <p class="text-gray-600">Déjà inscrit?
+                    <a href={{ route('auth.login') }} id="login" class="font-semibold text-link-500">Se connecter</a>
                 </p>
-            </form>
+            </x-form>
         </section>
     </div>
 @endsection

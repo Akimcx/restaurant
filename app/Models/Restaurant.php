@@ -13,11 +13,11 @@ class Restaurant extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name','email',
-        'url','phone',
-        'open_hours','close_hours',
+        'name', 'email',
+        'url', 'phone',
+        'open_hours', 'close_hours',
         'open_days',
-        'address',
+        'address', 'image'
     ];
 
     public function categories(): BelongsToMany

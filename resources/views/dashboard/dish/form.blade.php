@@ -5,33 +5,29 @@
     $action = $dish->exists ? route('dashboard.dish.update') : route('dashboard.dish.create');
 @endphp
 {{-- @dump($action) --}}
-<form class="card mt-4 grid gap-4 grid-cols-2" action="{{ $action }}">
-    <x-forms.input label='Name' holder='Name' id='name' name='name' value="{{ $name }}" />
-    <x-forms.input label='Description' holder='Description' id='description' name='description'
+<form class="card mt-4 grid grid-cols-2 gap-4" action="{{ $action }}">
+    <x-form.input label='Name' holder='Name' id='name' name='name' value="{{ $name }}" />
+    <x-form.input label='Description' holder='Description' id='description' name='description'
         value="{{ $description }}" />
-    <x-forms.input label='Price' holder='Price' id='price' name='price' type="number"
+    <x-form.input label='Price' holder='Price' id='price' name='price' type="number"
         value="{{ $price }}" />
-    <div class="form-group has-danger">
-        <label for="dish_img">Image</label>
-        <input type="file" name="dish_img" id="dish_img">
-    </div>
-    <div class="col-span-2 border-2 border-header rounded-xl p-1">
-        <label for="restaurant">Select Category</label>
-        <select id="restaurant" name="restaurant_id" class="w-full p-1">
-            <option>--Select Restaurant--</option>
+    <x-form.input class="pt-4" label="Image" type="file" name="dish_img"></x-form.input>
+    <div class="col-span-2 bg-inherit">
+        <x-form.select multiple label='Réstaurant' name="restaurant_id">
             @foreach ($restaurants as $restaurant)
+                <option value="{{ $restaurant->id }}">{{ $restaurant->name }}</option>
             @endforeach
-        </select>
+        </x-form.select>
     </div>
-    <button class="font-semibold bg-link-500 p-2 text-white rounded-lg hover:bg-link-900" type="submit">
+    <button class="rounded-lg bg-link-500 p-2 font-semibold text-white hover:bg-link-900" type="submit">
         @if ($dish->exists)
-            Update
+            Modifier
         @else
-            Create
+            Créer
         @endif
     </button>
     <a href="{{ route('dashboard.dish.index') }}"
-        class="text-center font-semibold bg-white p-2 text-header rounded-lg outline-1 outline hover:bg-header hover:text-white">
-        Cancel
+        class="rounded-lg bg-white p-2 text-center font-semibold text-header outline outline-1 hover:bg-header hover:text-white">
+        Annuler
     </a>
 </form>

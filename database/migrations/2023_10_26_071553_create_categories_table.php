@@ -19,12 +19,6 @@ return new class extends Migration
             $table->softDeletes()->nullable();
             $table->timestamps();
         });
-        Schema::create("category_restaurant", function (Blueprint $table) {
-            $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Restaurant::class)->constrained()->cascadeOnDelete();
-            $table->primary(["category_id", "restaurant_id"]);
-            $table->timestamps();
-        });
     }
 
     /**

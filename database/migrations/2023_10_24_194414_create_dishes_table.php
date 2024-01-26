@@ -16,15 +16,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dishes', function (Blueprint $table) {
-            $table->id('dishes_id');
-            $table->string('dishes_name')->nullable(false);
-            $table->integer('dishes_price')->nullable(false);
-            $table->string('dishes_img')->nullable(false);
-            $table->string('dishes_description')->nullable(false);
+            $table->id('id');
+            $table->string('name')->unique();
+            $table->integer('price');
+            $table->string('img');
+            $table->string('description');
             $table->timestamps();
-        });
-        Schema::table('restaurants', function (Blueprint $table) {
-            $table->foreignIdFor(Dish::class)->constrained()->cascadeOnUpdate();
+            $table->softDeletes()->nullable();
         });
     }
 
@@ -34,8 +32,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('dishes');
-        Schema::table('restaurants', function (Blueprint $table) {
-            $table->dropForeignIdFor(Category::class);
-        });
     }
 };

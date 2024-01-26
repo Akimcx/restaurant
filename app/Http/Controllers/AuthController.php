@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthLoginRequest;
+use App\Http\Requests\StoreAdminRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -18,7 +21,7 @@ class AuthController extends Controller
     {
         if (Auth::attempt($request->validated())) {
             $request->session()->regenerate();
-            return redirect()->intended("home.restaurant");
+            return redirect()->intended("/restaurant");
         }
         return redirect()->back()->withErrors(["email" => "Invalid Email"]);
     }
@@ -39,10 +42,18 @@ class AuthController extends Controller
         return view('auth.signin');
     }
 
-    public function signin(Request $request)
+    public function signin(StoreAdminRequest $request): RedirectResponse
     {
-        $this->validate($request, []);
-        $request->session()->put("", $request->input());
-        return redirect("");
+        $val = $request->validated();
+        // dd(Hash::make($val['password']));
+        $user = User::create([
+            'email' => $val['email'],
+            'password' => Hash::make($val['password']),
+            'name' => $val['name']
+        ]);
+        //Todo set user role to admin
+        $user->save();
+        Auth::loginUsingId($user->id);
+        return to_route("dashboard.index");
     }
 }

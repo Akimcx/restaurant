@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
+use App\Models\Price;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -12,21 +15,23 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view("dashboard.user.index");
+        return view("dashboard.user.index", [
+            "users" => User::all()
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('dashboard.user.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
         //
     }
@@ -37,6 +42,14 @@ class UserController extends Controller
     public function show(User $user)
     {
         //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function subscribe(Price $id): View
+    {
+        return view("dashboard.user.subscription");
     }
 
     /**

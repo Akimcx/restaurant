@@ -24,15 +24,15 @@ class StoreRestaurantRequest extends FormRequest
     {
         return [
             'name' => ['required'],
-            'email' => ['required','email'],
-            'url' => ['required','url'],
-            'phone' => ['required','max:8','min:8'],
+            'email' => ['required', 'email'],
+            'url' => ['required', 'url'],
+            'phone' => ['required', 'max:8', 'min:8'],
             'open_hours' => ['required'],
             'close_hours' => ['required'],
             'open_days' => ['required'],
             'address' => ['required'],
-            // 'image' => ['required'],
-            'category_id' => ['required','exists:categories,id']
+            'file' => ['image'],
+            'category_id' => ['required', 'exists:categories,id']
         ];
     }
 }

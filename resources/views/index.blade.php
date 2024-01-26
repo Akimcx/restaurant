@@ -2,18 +2,15 @@
 @section('title', 'Foodie Restauarants')
 @section('content')
     <section
-        class="hero bg-hero bg-cover py-20 relative z-20 text-white
-        before:content-['']
-        before:bg-gray-900 before:opacity-50 
-        before:absolute before:inset-0 before:-z-10">
+        class="hero relative z-20 bg-hero bg-cover py-20 text-white before:absolute before:inset-0 before:-z-10 before:bg-gray-900 before:opacity-50 before:content-['']">
         <div class="container text-center">
-            <h1 class="text-5xl pb-1">Food Order Website</h1>
+            <h1 class="pb-1 text-5xl">Food Order Website</h1>
             <h3 class="pb-1">Top restaurants and specials in town</h3>
             <form class="flex justify-center gap-1">
                 <input type="text" name="search"
-                    class="text-black mt-1 px-3 py-2 border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-link focus:ring-link rounded-md sm:text-sm focus:ring-1"
+                    class="mt-1 rounded-md border border-slate-300 px-3 py-2 text-black placeholder-slate-400 shadow-sm focus:border-link-500 focus:outline-none focus:ring-1 focus:ring-link-500 sm:text-sm"
                     placeholder="I would like to eat..." />
-                <button type="button" class="font-semibold rounded-full bg-link px-3">Search food</button>
+                <button type="button" class="rounded-full bg-link-500 px-3 font-semibold">Search food</button>
             </form>
         </div>
     </section>
@@ -25,7 +22,9 @@
             </div>
             <div class="row">
                 @forelse ($dishes as $dish)
-                    <p> {{ $dish->slogan }} </p>
+                    <p>
+                        <img src="{{ $dish->img }}" alt="{{ $dish->name }}">
+                    </p>
                 @empty
                     <p>No dishes</p>
                 @endforelse
@@ -44,7 +43,7 @@
                     </p>
                 </div>
             </div>
-            <div class="sectionData grid gap-4 grid-cols-2">
+            <div class="sectionData grid grid-cols-2 gap-4">
                 <div class="leftImg">
                     <img src='assets/img10.jpg' alt="Food Image">
                 </div>
@@ -65,7 +64,7 @@
             </div>
         </div>
     </section>
-    <section class="featured-restaurants">
+    <section class="mt-4">
         <div class="container">
             <div class="row">
                 <div class="col-sm-4">
@@ -86,37 +85,6 @@
             </div>
             <div class="row">
                 <div class="restaurant-listing">
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="bg-link-500 p-2">
-        <div class="container flex items-center gap-4 p-4 justify-between">
-            <div class="right-image w-4/5">
-                <figure>
-                    <img src="assets/4.png" alt="Right Image">
-                </figure>
-            </div>
-            <div class="flex flex-col gap-4 justify-around">
-                <h3 class="text-4xl font-bold">Download Foodie App</h3>
-                <p>
-                    You can now find our menu on our mobile applition wherever you are. Make your orders we will find you!
-                </p>
-                <div class="flex">
-                    <a href="#" class="">
-                        <div class="pull-left"><i class="fa fa-apple"></i> </div>
-                        <div class="pull-right">
-                            <span class="text">Available on the</span>
-                            <span class="text-2">App Store</span>
-                        </div>
-                    </a>
-                    <a href="#" class="">
-                        <div class="pull-left"><i class="fa fa-android"></i> </div>
-                        <div class="pull-right">
-                            <span class="text">Available on the</span>
-                            <span class="text-2">Play store</span>
-                        </div>
-                    </a>
                 </div>
             </div>
         </div>

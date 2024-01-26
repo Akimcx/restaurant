@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
@@ -8,6 +7,7 @@ use App\Http\Controllers\DishController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\UserController;
 use App\Models\Dish;
+use App\Models\Restaurant;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,40 +21,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix("dashboard")->name("dashboard.")->controller(DashboardController::class)->middleware("auth")->group(function () {
-    Route::get("/", "index")->name("index");
-    Route::resource("dish", DishController::class);
-    Route::resource("user", UserController::class);
-    Route::resource("restaurant", RestaurantController::class);
-    Route::resource("category", CategoryController::class);
-});
-// Route::prefix("dish")->name("dish.")->controller(DishController::class)->group(function () {
-//     Route::get("/", "index")->name("index");
-//     Route::get("/create", "create")->name("create");
-//     Route::get("/edit", "edit")->name("edit");
-// });
+Route::prefix("dashboard")->name("dashboard.")
+    ->controller(DashboardController::class)
+    ->middleware(["auth", "admin"])
+    ->group(function () {
+        Route::get("/", "index")->name("index");
+        Route::resource("dish", DishController::class)->except('show');
+        Route::resource("user", UserController::class);
+        Route::resource("restaurant", RestaurantController::class)->except('show');
+        Route::resource("category", CategoryController::class);
+    });
 
-Route::get('pricing',function () {
-   return view('pricing.index'); 
+Route::get("restaurant/{restaurant}", [RestaurantController::class, 'show'])
+    ->name("restaurant.show")
+    ->middleware('auth');
+
+Route::get("subscribe/{price}", [UserController::class, 'subscribe'])
+    ->name("subscribe")
+    ->middleware('auth');
+
+Route::get('pricing', function () {
+    return view('pricing.index');
 })->name('pricing.index');
 
-Route::prefix("admin")->name("admin.")->controller(AdminController::class)->group(function () {
-    Route::get("/", function () {
-        return to_route("admin.login");
-    })->name("base");
-
-    Route::get("/login", "loginView")->name("login");
-    Route::get("/signin", "signinView")->name("signin");
-    Route::post("/login", "login");
-    Route::post("/signin", "signin");
-});
-
 Route::prefix("auth")->name("auth.")->controller(AuthController::class)->group(function () {
-    Route::get("/login", "loginView")->name("login");
+    Route::get("/login", "loginView")->name("login")->middleware("guest");
     Route::post("/login", "login");
-    Route::get("/signin", "signinView")->name("signin");
+    Route::get("/signin", "signinView")->name("signin")->middleware("guest");
     Route::post("/signin", "signin");
-    Route::get("/logout", "logout")->name("logout");
+    Route::get("/logout", "logout")->name("logout")->middleware("auth");
 });
 
 Route::get('/', function () {
@@ -64,5 +59,5 @@ Route::get('/', function () {
 
 Route::get('/restaurant', function () {
     $dishes = Dish::all();
-    return view('index', ['dishes' => $dishes]);
+    return view('restaurant', ['dishes' => $dishes, 'restaurants' => Restaurant::all()]);
 })->name('home.restaurant');
