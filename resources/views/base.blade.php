@@ -50,8 +50,9 @@
         @yield('content')
     </main>
     <footer class='mt-auto flex w-full items-center bg-header p-4 text-slate-200'>
-        <div class="container mx-auto flex justify-center">
-            &copy; Copyright {{ now()->format('Y') }} - IsraTech
+        <div class="container mx-auto flex gap-4 justify-center">
+            <a href="#" class="hover:underline">Terms et conditions</a>
+            <p>&copy; Copyright {{ now()->format('Y') }} - IsraTech</p>
         </div>
     </footer>
 </body>
